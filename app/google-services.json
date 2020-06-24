@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1070211425382",
+    "firebase_url": "https://begard-1913d.firebaseio.com",
+    "project_id": "begard-1913d",
+    "storage_bucket": "begard-1913d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1070211425382:android:efff30e23748ee55ba79a7",
+        "android_client_info": {
+          "package_name": "com.example.begard"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1070211425382-rrjgtanog2sgtvjjfemr8p4ca7s43l9t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.begard",
+            "certificate_hash": "1f6fd5efcd6d6debb29d1baae4846fec0b5c4e01"
+          }
+        },
+        {
+          "client_id": "1070211425382-7lr259b75ialu53i0ocugbebppbbe4qe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAe7zl5KlSkqkZUs0eBTbqEll0CVuxQzPY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1070211425382-7lr259b75ialu53i0ocugbebppbbe4qe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
