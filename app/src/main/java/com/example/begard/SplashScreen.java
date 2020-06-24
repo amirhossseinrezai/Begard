@@ -1,10 +1,9 @@
 package com.example.begard;
 
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 
 import gr.net.maroulis.library.EasySplashScreen;
 
@@ -15,7 +14,7 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EasySplashScreen easySplashScreen = new EasySplashScreen(SplashScreen.this)
                 .withFullScreen()
-                .withTargetActivity(MainActivity.class)
+                .withTargetActivity(Log_In.class)
                 .withSplashTimeOut(4000)
                 .withBackgroundColor(Color.parseColor("#ffffff"))
                 .withHeaderText("")
