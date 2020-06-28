@@ -5,6 +5,10 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.fragment.app.ListFragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
@@ -32,12 +36,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         navigationView =findViewById(R.id.navigation);
         drawerLayout =findViewById(R.id.draweLayout);
+
         actionToggle = new ActionBarDrawerToggle(MainActivity.this,drawerLayout,R.string.open,R.string.close);
         actionToggle.setDrawerIndicatorEnabled(true);
         drawerLayout.addDrawerListener(actionToggle);
         actionToggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        recyclerView();
     }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -68,5 +74,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return true;
         }
         return  super.onOptionsItemSelected(item);
+    }
+    public void recyclerView(){
+        ListFragment listFragment = new ListFragment();
+        FragmentManager frmanager = getSupportFragmentManager();
+        FragmentTransaction frTransaction = frmanager.beginTransaction();
+        frTransaction.add(R.id.reMain,listFragment);
+        //frTransaction.commit();
     }
 }
