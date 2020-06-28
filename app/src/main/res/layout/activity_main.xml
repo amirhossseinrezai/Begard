@@ -4,18 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity" >
-
-
-    <LinearLayout
+    >
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/draweLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <Button
-            android:id="@+id/btnSignOut"
+        android:layout_height="match_parent">
+        <fragment
+            android:id="@+id/navHostFragment"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Button" />
-    </LinearLayout>
+            android:layout_height="match_parent"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            app:defaultNavHost="true"
+            app:navGraph="@navigation/main"></fragment>
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/navigation"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="#ffff"
+            app:headerLayout="@layout/header"
+            app:itemIconTint="@color/common_google_signin_btn_text_light_default"
+            app:menu="@menu/drawermenue">
+        </com.google.android.material.navigation.NavigationView>
+    </androidx.drawerlayout.widget.DrawerLayout>
 </RelativeLayout>

@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity android:name=".Log_In" />
+        <activity android:name=".Sign_Up" />
+        <activity android:name=".MainActivity"/>
         <activity
             android:name=".SplashScreen"
             android:theme="@style/Theme.AppCompat.NoActionBar">
@@ -19,9 +21,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Log_In" />
-        <activity android:name=".Sign_Up"></activity>
-        <activity android:name=".MainActivity" />
+
     </application>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- Android 10 or higher -->
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
 </manifest>
