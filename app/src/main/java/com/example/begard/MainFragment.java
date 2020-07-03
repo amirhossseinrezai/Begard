@@ -1,5 +1,6 @@
 package com.example.begard;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,7 +17,7 @@ import android.view.ViewGroup;
  * Use the {@link MainFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MainFragment extends Fragment {
+public class MainFragment extends Fragment implements ListAdapter.onAdapterListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -64,10 +65,16 @@ public class MainFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         RecyclerView recyclerView = view.findViewById(R.id.recycle);
-        com.example.begard.ListAdapter listAdapter = new ListAdapter();
+        com.example.begard.ListAdapter listAdapter = new ListAdapter(MainFragment.this);
         recyclerView.setAdapter(listAdapter);
         RecyclerView.LayoutManager layoutManager =new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         return view;
+    }
+
+    @Override
+    public void onAdapterListener(int position) {
+        Intent intent = new Intent(getActivity(),ShowListItemListener.class);
+        startActivity(intent);
     }
 }

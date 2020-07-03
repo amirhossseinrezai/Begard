@@ -26,7 +26,7 @@ import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener  {
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionToggle;
     NavigationView navigationView;
@@ -76,6 +76,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return  super.onOptionsItemSelected(item);
     }
     public void recyclerView(){
+        MainFragment mainFragment =new MainFragment();
         ListFragment listFragment = new ListFragment();
         FragmentManager frmanager = getSupportFragmentManager();
         FragmentTransaction frTransaction = frmanager.beginTransaction();
