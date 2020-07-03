@@ -3,7 +3,6 @@ package com.example.begard;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -31,7 +30,7 @@ public class Log_In extends AppCompatActivity {
         setContentView(R.layout.activity_log__in);
 
         myfirebaseAuth = FirebaseAuth.getInstance();
-        edtEmail =findViewById(R.id.edtEmail);
+        edtEmail =findViewById(R.id.edtNumber);
         edtPassword =findViewById(R.id.edtPassword);
         txtHaveNotRegistered =findViewById(R.id.chTextForgottenPassword);
         btnSignin = findViewById(R.id.btnSignIn);

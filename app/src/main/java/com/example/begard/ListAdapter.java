@@ -8,14 +8,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class ListAdapter extends RecyclerView.Adapter {
+public class ListAdapter extends RecyclerView.Adapter{
+    private onAdapterListener onAdapterListener;
+    public ListAdapter(onAdapterListener onAdapterListener){
+        this.onAdapterListener=onAdapterListener;
+    }
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
     View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.listitem,parent,false);
-    return new ListViewHolder(view);
+    return new ListViewHolder(view,onAdapterListener);
     }
-
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ((ListViewHolder) holder).bindView(position);
@@ -25,15 +28,17 @@ public class ListAdapter extends RecyclerView.Adapter {
     public int getItemCount() {
         return Data.dta.length;
     }
-    private class ListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public static class ListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         private TextView textView,textView1;
         private ImageView imageView;
-        public ListViewHolder(View itemView){
+        private onAdapterListener onAdapterListener;
+        public ListViewHolder(View itemView,onAdapterListener onAdapterListener){
             super(itemView);
             textView = itemView.findViewById(R.id.txtTitle);
             textView1 = itemView.findViewById(R.id.txtDescription);
             imageView = itemView.findViewById(R.id.imgContent);
+            this.onAdapterListener = onAdapterListener;
             itemView.setOnClickListener(this);
         }
         public void bindView(int position){
@@ -42,7 +47,10 @@ public class ListAdapter extends RecyclerView.Adapter {
             imageView.setImageResource(R.drawable.begard);
         }
         public void onClick(View view){
-
+            onAdapterListener.onAdapterListener(getAdapterPosition());
         }
+    }
+    public interface onAdapterListener{
+        void onAdapterListener(int position);
     }
 }

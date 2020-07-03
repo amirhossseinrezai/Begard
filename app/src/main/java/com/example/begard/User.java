@@ -1,12 +1,16 @@
 package com.example.begard;
 
 public class User {
-    private String fullName;
-    private String email;
-    private String password;
+    public String UserID;
+    public String fullName;
+    public String email;
+    public String password;
+    public String number;
 
-    public User(String email, String password,String fullName) {
+    public User(String UserID, String number, String email, String password,String fullName) {
         this.email = email;
+        this.number = number;
+        this.UserID = UserID;
         this.password = password;
         this.fullName = fullName;
     }
@@ -33,5 +37,9 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+    public User getUser(String gID){
+User gUser = new User();
+
     }
 }
