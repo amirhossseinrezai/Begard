@@ -7,7 +7,7 @@ public class User {
     public String password;
     public String number;
 
-    public User(String UserID, String number, String email, String password,String fullName) {
+    public User( String email, String password,String fullName) {
         this.email = email;
         this.number = number;
         this.UserID = UserID;
@@ -38,8 +38,8 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-    public User getUser(String gID){
-User gUser = new User();
+  //  public User getUser(String gID){
+//User gUser = new User();
 
-    }
+  //  }
 }

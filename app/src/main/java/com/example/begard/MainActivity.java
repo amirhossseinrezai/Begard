@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -22,19 +23,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionToggle;
     NavigationView navigationView;
+    Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         navigationView =findViewById(R.id.navigation);
         drawerLayout =findViewById(R.id.draweLayout);
+        toolbar = findViewById(R.id.toolbar);
 
-        actionToggle = new ActionBarDrawerToggle(MainActivity.this,drawerLayout,R.string.open,R.string.close);
+        actionToggle = new ActionBarDrawerToggle(MainActivity.this,drawerLayout,toolbar,R.string.open,R.string.close);
         actionToggle.setDrawerIndicatorEnabled(true);
         drawerLayout.addDrawerListener(actionToggle);
         actionToggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         recyclerView();
     }
     @Override
@@ -71,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ListFragment listFragment = new ListFragment();
         FragmentManager frmanager = getSupportFragmentManager();
         FragmentTransaction frTransaction = frmanager.beginTransaction();
-        frTransaction.add(R.id.reMain,listFragment);
+        frTransaction.add(R.id.draweLayout,listFragment);
         //frTransaction.commit();
     }
 }
