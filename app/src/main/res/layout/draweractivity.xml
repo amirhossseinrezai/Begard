@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:background="#ffff"
         app:itemIconTint="@color/common_google_signin_btn_text_light_default"
-        app:menu="@menu/drawermenue">
+        app:menu="@menu/drawermenu">
     </com.google.android.material.navigation.NavigationView>
 
 </androidx.drawerlayout.widget.DrawerLayout>

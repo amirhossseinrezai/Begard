@@ -8,6 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -15,24 +16,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/includeLayout">
-        <include android:layout_width="match_parent"
+        <include
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             layout="@layout/toolbar"></include>
     </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/navHostLayout"
-        android:layout_below="@+id/includeLayout"
-        >
-        <fragment
-        android:id="@+id/navHostFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:name="androidx.navigation.fragment.NavHostFragment"
-        app:defaultNavHost="true"
-        app:navGraph="@navigation/main"></fragment>
-    </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/navHostLayout"
+            android:layout_below="@+id/includeLayout"
+            >
+            <fragment
+                android:id="@+id/navHostFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:name="androidx.navigation.fragment.NavHostFragment"
+                app:defaultNavHost="true"
+                app:navGraph="@navigation/main"></fragment>
+        </RelativeLayout>
     </RelativeLayout>
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigation"
@@ -42,6 +44,6 @@
         android:background="#ffff"
         app:headerLayout="@layout/header"
         app:itemIconTint="@color/common_google_signin_btn_text_light_default"
-        app:menu="@menu/drawermenue">
+        app:menu="@menu/drawermenu">
     </com.google.android.material.navigation.NavigationView>
     </androidx.drawerlayout.widget.DrawerLayout>

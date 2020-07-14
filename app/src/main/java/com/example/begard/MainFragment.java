@@ -11,6 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link MainFragment#newInstance} factory method to
@@ -22,6 +25,7 @@ public class MainFragment extends Fragment implements ListAdapter.onAdapterListe
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    public static ListAdapter listAdapter;
 
 
     // TODO: Rename and change types of parameters
@@ -58,13 +62,19 @@ public class MainFragment extends Fragment implements ListAdapter.onAdapterListe
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-
+    List<Data> dtaUser = new ArrayList<Data>();
+    public static RecyclerView recyclerView;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
-        RecyclerView recyclerView = view.findViewById(R.id.recycle);
-        com.example.begard.ListAdapter listAdapter = new ListAdapter(MainFragment.this);
+        recyclerView = view.findViewById(R.id.recycle);
+        String[] strData = new String[]{"Ali","Amir","Hosein","Mohammad","Kian","Illia"};
+        for (String data : strData) {
+            Data d = new Data(data);
+            dtaUser.add(d);
+        }
+         listAdapter = new ListAdapter(MainFragment.this,dtaUser);
         recyclerView.setAdapter(listAdapter);
         RecyclerView.LayoutManager layoutManager =new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
@@ -72,8 +82,9 @@ public class MainFragment extends Fragment implements ListAdapter.onAdapterListe
     }
 
     @Override
-    public void onAdapterListener(int position) {
-        Intent intent = new Intent(getActivity(),ShowListItemListener.class);
-        startActivity(intent);
+    public void onAdapterListener(Data userModel) {
+        startActivity(new Intent(getActivity(),ShowListItemListener.class).putExtra("data",userModel));
     }
+
+
 }

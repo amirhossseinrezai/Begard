@@ -3,16 +3,28 @@ package com.example.begard;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class ListAdapter extends RecyclerView.Adapter{
+public class ListAdapter extends RecyclerView.Adapter implements Filterable {
     private onAdapterListener onAdapterListener;
-    public ListAdapter(onAdapterListener onAdapterListener){
+    private  List<Data> listData;
+    private List<Data> listFilter;
+
+    public ListAdapter(onAdapterListener onAdapterListener,List<Data> listData){
         this.onAdapterListener=onAdapterListener;
+        this.listData = listData;
+        this.listFilter = listData;
     }
+
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -21,36 +33,79 @@ public class ListAdapter extends RecyclerView.Adapter{
     }
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ((ListViewHolder) holder).bindView(position);
+       ((ListViewHolder) holder).bindView(position);
+       // Data dta = listData.get(position);
+       // String title = dta.getTitle();
+       // String description = dta.getDescription();
+       // holder.textViewDescription.setText("description");
+      //  holder.imageViewContent.setImageResource(R.drawable.begard);
     }
 
     @Override
     public int getItemCount() {
-        return Data.dta.length;
+        return listData.size();
     }
-    public static class ListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        private TextView textView,textView1;
-        private ImageView imageView;
-        private onAdapterListener onAdapterListener;
-        public ListViewHolder(View itemView,onAdapterListener onAdapterListener){
+    @Override
+    public Filter getFilter() {
+        final Filter filter =new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                FilterResults filterResult = new FilterResults();
+                if(charSequence == null | charSequence.length() == 0){
+                    filterResult.count = listFilter.size();
+                    filterResult.values = listFilter;
+                }else{
+                    String searchChar = charSequence.toString().toLowerCase();
+                    List<Data> resultData = new ArrayList<Data>();
+                    for (Data dta: listFilter) {
+                            if(dta.getTitle().toLowerCase().contains(searchChar)){
+                                resultData.add(dta);
+                            }
+                    }
+                    filterResult.count = resultData.size();
+                    filterResult.values = resultData;
+                }
+                return filterResult;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                listData = (List<Data>)filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
+        return filter;
+    }
+
+    public  class ListViewHolder extends RecyclerView.ViewHolder{
+
+        public TextView textViewTitle,textViewDescription;
+        public ImageView imageViewContent;
+        onAdapterListener onAdapterListener;
+        public ListViewHolder(View itemView, final onAdapterListener onAdapterListener){
             super(itemView);
-            textView = itemView.findViewById(R.id.txtTitle);
-            textView1 = itemView.findViewById(R.id.txtDescription);
-            imageView = itemView.findViewById(R.id.imgContent);
+            textViewTitle = itemView.findViewById(R.id.txtTitle);
+            textViewDescription = itemView.findViewById(R.id.txtDescription);
+            imageViewContent = itemView.findViewById(R.id.imgContent);
             this.onAdapterListener = onAdapterListener;
-            itemView.setOnClickListener(this);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onAdapterListener.onAdapterListener(listData.get(getAdapterPosition()));
+                }
+            });
         }
-        public void bindView(int position){
-            textView.setText(Data.dta[position]);
-            textView1.setText("Description");
-            imageView.setImageResource(R.drawable.begard);
+       public void bindView(int position){
+            Data dta =listData.get(position);
+            String s = dta.getTitle();
+            textViewTitle.setText(s);
+            textViewDescription.setText("Description");
+            imageViewContent.setImageResource(R.drawable.begard);
         }
-        public void onClick(View view){
-            onAdapterListener.onAdapterListener(getAdapterPosition());
-        }
+
     }
     public interface onAdapterListener{
-        void onAdapterListener(int position);
+        void onAdapterListener(Data userModel);
     }
 }
