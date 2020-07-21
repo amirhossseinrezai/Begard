@@ -16,6 +16,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
     private static final String email = "email";
     private static final String password = "Password";
     private static final String number = "Number";
+
     public DatabaseManager (@Nullable Context context) {
         super(context, DatabaseName, null, Version);
     }
