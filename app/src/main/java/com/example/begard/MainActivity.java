@@ -2,12 +2,15 @@ package com.example.begard;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,14 +25,15 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+    EditText edtName, edtEmail, edtID, edtNumber;
+    Button btnInsert, btnView, btnUpdate, btnDelete;
+    DatabaseManager dbm;
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionToggle;
     NavigationView navigationView;
@@ -40,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        dbm = new DatabaseManager(this);
         toolBar = findViewById(R.id.toolbar);
         setSupportActionBar(toolBar);
         getSupportActionBar().setTitle("");
@@ -50,11 +54,40 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         actionToggle.setDrawerIndicatorEnabled(true);
         drawerLayout.addDrawerListener(actionToggle);
         actionToggle.syncState();
-
         navigationView.setNavigationItemSelectedListener(this);
-
         //setRecyclerView();
         setDrawerLayout();
+        edtID = (EditText) findViewById(R.id.edtID);
+        edtName = (EditText) findViewById(R.id.edtName);
+        edtEmail = (EditText) findViewById(R.id.edtEmail);
+        edtNumber = (EditText) findViewById(R.id.edtNumber);
+        btnInsert = (Button) findViewById(R.id.btnInsert);
+        btnView = (Button) findViewById(R.id.btnView);
+        btnUpdate = (Button) findViewById(R.id.btnUpdate);
+        btnDelete = (Button) findViewById(R.id.btnDelete);
+        btnInsert.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                String mID = edtID.getText().toString();
+                String mName = edtName.getText().toString();
+                String email = edtEmail.getText().toString();
+                String number = edtNumber.getText().toString();
+                if (TextUtils.isEmpty(mID) || TextUtils.isEmpty(mName) || TextUtils.isEmpty(email) || TextUtils.isEmpty(number)){
+
+                    Toast.makeText(MainActivity.this, "تمامی فیلدها باید تکمیل شود", Toast.LENGTH_LONG).show();
+
+                } else {
+
+                    User user = new User();
+                    user.UserID = mID;
+                    user.fullName = mName;
+                    user.email = email;
+                    user.number = number;
+                    dbm.insertUser(user);
+                    Toast.makeText(MainActivity.this, "اطلاعات با موفقیت ذخیره شد", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 
     @Override
