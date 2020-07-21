@@ -3,6 +3,8 @@ package com.example.begard;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -11,12 +13,16 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.fragment.app.ListFragment;
@@ -55,7 +61,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.addDrawerListener(actionToggle);
         actionToggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+        NavController controller = Navigation.findNavController(MainActivity.this,R.id.navHostFragment);
+        NavigationUI.setupWithNavController(navigationView,controller);
         //setRecyclerView();
+        //setDrawerLayout();
         setDrawerLayout();
         edtID = (EditText) findViewById(R.id.edtID);
         edtName = (EditText) findViewById(R.id.edtName);
@@ -115,16 +124,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        NavController controller = Navigation.findNavController(MainActivity.this,R.id.navHostFragment);
-        NavigationUI.setupWithNavController(navigationView,controller);
+
         switch (id){
             case R.id.profile://do somthing
+                setDrawerLayout(new ProfileFragment());
                 break;
             case R.id.settings://do somthing
+                setDrawerLayout(new SettingsFragment());
                 break;
             case  R.id.contactUs://do somthing
+                setDrawerLayout(new ContactUsFragment());
                 break;
             case  R.id.about://do somthing
+                setDrawerLayout(new AboutFragment());
                 break;
             case R.id.logOut:
                 FirebaseAuth.getInstance().signOut();
@@ -143,29 +155,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         return  super.onOptionsItemSelected(item);
     }
-    public void setDrawerLayout(){
+    public void setDrawerLayout(Fragment fragment){
         ListFragment listFragment = new ListFragment();
         FragmentManager frmanager = getSupportFragmentManager();
         FragmentTransaction frTransaction = frmanager.beginTransaction();
-        frTransaction.add(R.id.draweLayout,listFragment);
-        //frTransaction.commit();
+        frTransaction.add(R.id.draweLayout,fragment);
+        frTransaction.commit();
     }
-   /* public void setRecyclerView(){
-       // View view = inflater.inflate(R.layout.fragment_main, container, false);
-        recyclerView = findViewById(R.id.recycle);
-        String[] strData = new String[]{"Ali","Amir","Hosein","Mohammad","Kian","Illia"};
-        for (String str : strData) {
-            dtaUser.add(new Data(str));
-        }
-        listAdapter = new ListAdapter((ListAdapter.onAdapterListener) MainActivity.this,dtaUser);
-        recyclerView.setAdapter(listAdapter);
-        RecyclerView.LayoutManager layoutManager =new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(layoutManager);
-    }*/
 
-   /* @Override
-    public void onAdapterListener(int position) {
-        Intent intent = new Intent(getApplicationContext(),ShowListItemListener.class);
-        startActivity(intent);
-    }*/
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder aBuilder = new AlertDialog.Builder(MainActivity.this);
+        aBuilder.setMessage("Are You Sure?").setCancelable(false)
+                .setPositiveButton("Yee", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                MainActivity.this.finish();
+                Log.e("LOG","onClick Yes Called");
+            }
+        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
+        AlertDialog alertDialog = aBuilder.create();
+        alertDialog.show();
+        //super.onBackPressed();
+    }
 }
