@@ -6,15 +6,65 @@
     android:layout_height="match_parent"
     tools:context=".ShowListItemListener">
 
-
-    <TextView
-        android:id="@+id/txtget"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="text"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+    </androidx.viewpager.widget.ViewPager>
+
+    <TextView
+        android:id="@+id/txtSentTitleFromMainActivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|end"
+        android:layout_margin="20dp"
+        android:gravity="right|end"
+        android:padding="15dp"
+        android:text="TextView"
+        android:textColor="@color/grayColor"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewPager" />
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtSentTitleFromMainActivity"
+        android:listSelector="@android:color/transparent"
+        android:cacheColorHint="@android:color/transparent">
+
+    </ListView>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/WhiteColor"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <Button
+            android:id="@+id/btnrent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/custom_button1"
+            android:text="Rent"
+            android:textColor="@color/WhiteColor"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
