@@ -1,5 +1,6 @@
 package com.example.begard;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -97,6 +98,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
             }
         });
+        //setDrawerLayout();
     }
 
     @Override
@@ -124,7 +126,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-
+        NavController controller = Navigation.findNavController(MainActivity.this,R.id.navHostFragment);
+        NavigationUI.setupWithNavController(navigationView,controller);
         switch (id){
             case R.id.profile://do somthing
                 setDrawerLayout(new ProfileFragment());
