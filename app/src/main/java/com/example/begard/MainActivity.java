@@ -1,25 +1,19 @@
 package com.example.begard;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.fragment.app.ListFragment;
@@ -36,6 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionToggle;
     NavigationView navigationView;
@@ -56,12 +51,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         actionToggle.setDrawerIndicatorEnabled(true);
         drawerLayout.addDrawerListener(actionToggle);
         actionToggle.syncState();
-
         navigationView.setNavigationItemSelectedListener(this);
         NavController controller = Navigation.findNavController(MainActivity.this,R.id.navHostFragment);
         NavigationUI.setupWithNavController(navigationView,controller);
-        //setRecyclerView();
-        //setDrawerLayout();
+
     }
 
     @Override
@@ -89,7 +82,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-
+        NavController controller = Navigation.findNavController(MainActivity.this,R.id.navHostFragment);
+        NavigationUI.setupWithNavController(navigationView,controller);
         switch (id){
             case R.id.profile://do somthing
                 setDrawerLayout(new ProfileFragment());
@@ -120,12 +114,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         return  super.onOptionsItemSelected(item);
     }
-    public void setDrawerLayout(Fragment fragment){
+    public void setDrawerLayout(){
         ListFragment listFragment = new ListFragment();
         FragmentManager frmanager = getSupportFragmentManager();
         FragmentTransaction frTransaction = frmanager.beginTransaction();
-        frTransaction.add(R.id.draweLayout,fragment);
-        frTransaction.commit();
+        frTransaction.add(R.id.draweLayout,listFragment);
+        //frTransaction.commit();
     }
 
 
