@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -17,29 +18,29 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ShowListItemListener extends AppCompatActivity  {
-    TextView textView;
-    List<String> lst = new ArrayList<>(Arrays.asList(new Data().getStrData()));
-    ListView lstView;
-    ArrayAdapter<String> arrayAdapter;
-
+    TextView txtTitle,txtDescription,txtCosts;
+    Data data= new Data();
+    String[] lst ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_list_item_listener);
-        textView = findViewById(R.id.txtSentTitleFromMainActivity);
-        lstView = findViewById(R.id.listView);
-
+        txtTitle = findViewById(R.id.txtSentTitleFromMainActivity);
+        txtCosts = findViewById(R.id.txtCost);
+        txtDescription = findViewById(R.id.txt_Description);
+        lst = new String[5];
+        for (int i = 0 ; i < 5 ; i++) {
+            lst[i]=data.getStrData()[i];
+        }
         ViewPager viewPager =findViewById(R.id.viewPager);
         Intent intent =getIntent();
-        arrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,lst);
         if(intent.getExtras() != null){
             Data data = (Data) intent.getSerializableExtra("data");
-            lst.get(0).replace(lst.get(0),data.getTitle());
-            //textView.setText(data.getTitle());
+            txtTitle.setText(data.getTitle());
+            txtCosts.setText("250000"+" تومان ");
+            txtDescription.setText(data.getDescription());
             ImageAdapter imageAdapter = new ImageAdapter(this,data.getmImage());
             viewPager.setAdapter(imageAdapter);
-            lstView.onTouchModeChanged(false);
-            lstView.setAdapter(arrayAdapter);
         }
     }
 }

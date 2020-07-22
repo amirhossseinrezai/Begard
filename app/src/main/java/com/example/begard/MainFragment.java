@@ -65,7 +65,6 @@ public class MainFragment extends Fragment implements ListAdapter.onAdapterListe
         }
     }
     List<Data> dtaUser = new ArrayList<Data>();
-    DatabaseManager dbm;
     public static RecyclerView recyclerView;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

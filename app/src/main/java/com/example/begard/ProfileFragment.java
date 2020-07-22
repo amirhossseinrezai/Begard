@@ -64,7 +64,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_main, container, false);
+        View view = inflater.inflate(R.layout.fragment_profile, container, false);
         dbm = new DatabaseManager(getActivity());
         edtID = view.findViewById(R.id.edtID);
         edtName =  view.findViewById(R.id.edtName);
@@ -90,7 +90,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
         } else {
 
-            User user = new User();
+            User user = new User(email,number,mName);
             user.UserID = mID;
             user.fullName = mName;
             user.email = email;
