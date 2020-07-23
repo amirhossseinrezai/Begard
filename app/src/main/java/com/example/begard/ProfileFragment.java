@@ -98,5 +98,11 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
             dbm.insertUser(user);
             Toast.makeText(getActivity(), "اطلاعات با موفقیت ذخیره شد", Toast.LENGTH_LONG).show();
     }
+       // Data data = new Data();
+        //dbm.insertData(data);
+        //data.Price = Price;
+int x ;
+
+
     }
 }
