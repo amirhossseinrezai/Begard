@@ -54,7 +54,8 @@
                 android:layout_marginRight="5dp"
                 android:ems="10"
                 android:hint="Password"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:password="true" />
         </LinearLayout>
 
         <LinearLayout

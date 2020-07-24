@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ActionBarDrawerToggle actionToggle;
     NavigationView navigationView;
     Toolbar toolBar;
+    private boolean isItem = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,8 +54,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         actionToggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-        NavController controller = Navigation.findNavController(MainActivity.this,R.id.navHostFragment);
-        NavigationUI.setupWithNavController(navigationView,controller);
+
 
 
     }
@@ -87,24 +87,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavController controller = Navigation.findNavController(MainActivity.this,R.id.navHostFragment);
         NavigationUI.setupWithNavController(navigationView,controller);
         switch (id){
+            /*case  R.id.home:
+                setDrawerLayout(new MainFragment());
+                break;
             case R.id.profile:
                 setDrawerLayout(new ProfileFragment());
                 break;
             case R.id.settings:
                 setDrawerLayout(new SettingsFragment());
                 break;
-            case  R.id.contactUs:
-                setDrawerLayout(new ContactUsFragment());
-                break;
             case  R.id.about:
                 setDrawerLayout(new AboutFragment());
                 break;
+            case R.id.RegisterPlace:
+                setDrawerLayout(new AddingDataByUserFragment());
+                break;*/
             case R.id.logOut:
                 FirebaseAuth.getInstance().signOut();
                 Intent intent =new Intent(MainActivity.this,Log_In.class);
                 startActivity(intent);
+                break;
         }
-        return false;
+        return true;
     }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -121,6 +125,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         FragmentTransaction frTransaction = frmanager.beginTransaction();
         frTransaction.add(R.id.draweLayout,fragment);
     }
+
 
 
     @Override

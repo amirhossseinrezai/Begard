@@ -1,15 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".AboutFragment"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    tools:context=".AboutFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="اگر قصد سفر دارید و به دنبال تجربه شایسته سفر هستید، یافتن اقامتگاهی مناسب از نخستین اقدامات شما باید باشد گروه نرم افزاری آنالیزتک با ارائه ی برنامه ی «بگرد» اینجاست تا به شما کمک کند برای پیدا کردن جاهای بکر و دنج برای یه سفر دل انگیز و همچنین پل ارتباطی ای باشد بین شما و کسایی که میخواهند توی سفر¬ها به شما خدمات رسانی کنند. آدرس ایمیل برنامه ی بگرد:  analyzetechbegard@gmail.com "
-        android:textSize="18sp" />
+        android:layout_height="wrap_content">
 
+        <TextView
+            android:id="@+id/describe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:background="@drawable/itemselector"
+            android:fontFamily="@font/iransansfanum"
+            android:text="اگر قصد سفر دارید و به دنبال تجربه شایسته سفر هستید، یافتن اقامتگاهی مناسب از نخستین اقدامات شما باید باشد گروه نرم افزاری آنالیزتک با ارائه ی برنامه ی «بگرد» اینجاست تا به شما کمک کند برای پیدا کردن جاهای بکر و دنج برای یه سفر دل انگیز و همچنین پل ارتباطی ای باشد بین شما و کسایی که میخواهند توی سفرها به شما خدمات رسانی کنند. آدرس ایمیل برنامه ی بگرد "
+            android:textColor="@color/grayColor"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/describe"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:text="analyzetechbegard@gmail.com"
+            android:textColor="@color/grayColor" />
+    </RelativeLayout>
 </FrameLayout>

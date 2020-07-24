@@ -21,14 +21,14 @@
         android:label="settings"
         tools:layout="@layout/fragment_settings" />
     <fragment
-        android:id="@+id/contactUs"
-        android:name="com.example.begard.ContactUsFragment"
-        android:label="contact_us"
-        tools:layout="@layout/fragment_contact_us" />
-    <fragment
         android:id="@+id/about"
         android:name="com.example.begard.AboutFragment"
         android:label="about"
         tools:layout="@layout/fragment_about" />
+    <fragment
+        android:id="@+id/RegisterPlace"
+        android:name="com.example.begard.AddingDataByUserFragment"
+        android:label="Register Place"
+        tools:layout="@layout/fragment_adding_data_by_user" />
 
 </navigation>

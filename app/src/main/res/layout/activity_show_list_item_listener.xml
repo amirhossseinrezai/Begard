@@ -78,7 +78,7 @@
                     android:textColor="?android:attr/colorEdgeEffect"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    android:layout_marginStart="10dp" />
+                    android:layout_marginStart="10dp" tools:targetApi="lollipop"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -135,7 +135,7 @@
         android:layout_alignParentBottom="true">
 
         <Button
-            android:id="@+id/btnrent"
+            android:id="@+id/btnRent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
