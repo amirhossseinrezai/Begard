@@ -22,29 +22,28 @@ import androidx.annotation.NonNull;
 
 public class Sign_Up extends AppCompatActivity implements View.OnClickListener {
 
-    EditText edtFullName,edtUserName,edtPassWord,edtEmail;
+    EditText edtFullName, edtUserID, edtPassWord, edtEmail, edtPhoneNumber;
     Button btnSignUp;
     TextView txtHaveAnAccount;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     FirebaseAuth firebaseAuth;
     User user;
-    private static  final String USER = "user";
-    private static  final  String TAG = "RegisterActivity";
+    private static final String USER = "user";
+    private static final String TAG = "RegisterActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign__up);
 
-
         edtFullName = findViewById(R.id.edtName);
-        edtUserName = findViewById(R.id.edtNumber);
+        edtPhoneNumber = findViewById(R.id.edtPhoneNumber);
+        edtUserID = findViewById(R.id.edtUserID);
         edtPassWord = findViewById(R.id.edtPassword);
-        edtEmail = findViewById(R.id.edtNumber);
+        edtEmail = findViewById(R.id.edtEmail);
         btnSignUp = findViewById(R.id.btnSignUp);
         txtHaveAnAccount = findViewById(R.id.txtSignin);
-
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference(USER);
         firebaseAuth = FirebaseAuth.getInstance();
@@ -53,7 +52,7 @@ public class Sign_Up extends AppCompatActivity implements View.OnClickListener {
         txtHaveAnAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent0 = new Intent(Sign_Up.this,Log_In.class);
+                Intent intent0 = new Intent(Sign_Up.this, Log_In.class);
                 startActivity(intent0);
             }
         });
@@ -64,31 +63,34 @@ public class Sign_Up extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View view) {
         String fullname = edtFullName.getText().toString();
         String email = edtEmail.getText().toString();
-        String userName = edtUserName.getText().toString();
+        String UserID = edtUserID.getText().toString();
+        String number = edtPhoneNumber.getText().toString();
         String password = edtPassWord.getText().toString();
 
-        if(fullname.isEmpty()){
+        if (fullname.isEmpty()) {
             edtFullName.setError("Please enter the fullname");
             edtFullName.requestFocus();
-        }else if(email.isEmpty()){
+        } else if (email.isEmpty()) {
             edtEmail.setError("Please enter an Email");
             edtEmail.requestFocus();
-        }else if(userName.isEmpty()){
-            edtUserName.setError("Please enter your username");
-            edtUserName.requestFocus();
-        }else if(password.isEmpty()){
-            edtPassWord.setError("Please enter you'r password");
+        } else if (UserID.isEmpty()) {
+            edtUserID.setError("Please enter your userID");
+            edtUserID.requestFocus();
+        } else if (password.isEmpty()) {
+            edtPassWord.setError("Please enter your password");
             edtPassWord.requestFocus();
-        }else if(fullname.isEmpty() && email.isEmpty() && userName.isEmpty() && password.isEmpty()){
-            Toast.makeText(Sign_Up.this,"Fields are empty!",Toast.LENGTH_SHORT).show();
-        }
-        else{
-            user =new User(email,password,fullname);
-            registerUser(email,password);
+        } else if (fullname.isEmpty() && email.isEmpty() && UserID.isEmpty() && password.isEmpty()) {
+            Toast.makeText(Sign_Up.this, "Fields are empty!", Toast.LENGTH_SHORT).show();
+        } else {
+            user = new User(UserID,fullname,email,number,password);
+            /*DatabaseManager dbm = new DatabaseManager(getApplicationContext());
+            dbm.insertUser(user);*/
+            registerUser(email, password);
         }
 
     }
-    public  void registerUser(String email,String password){
+
+    public void registerUser(String email, String password) {
         firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(Sign_Up.this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -111,8 +113,9 @@ public class Sign_Up extends AppCompatActivity implements View.OnClickListener {
                     }
                 });
     }
-    public void updateUI(FirebaseUser firebaseUser){
-        Intent i = new Intent(Sign_Up.this,Log_In.class);
+
+    public void updateUI(FirebaseUser firebaseUser) {
+        Intent i = new Intent(Sign_Up.this, Log_In.class);
         String keyID = databaseReference.push().getKey();
         databaseReference.child(keyID).setValue(user);
         startActivity(i);

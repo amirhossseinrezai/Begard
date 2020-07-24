@@ -21,7 +21,10 @@ import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.contentcapture.DataRemovalRequest;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -42,7 +45,7 @@ import java.util.List;
  * Use the {@link AddingDataByUserFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AddingDataByUserFragment extends Fragment {
+public class AddingDataByUserFragment extends Fragment implements View.OnClickListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -83,6 +86,11 @@ public class AddingDataByUserFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
+    ImageView imgAdderListener;
+    EditText edtPlaceName,edtAbout,edtAddress;
+    Button btnregister;
+    DatabaseManager dbm;
+
     ArrayList imgAdder = new ArrayList() ;
     ImageView picImage;
     private static final int IMAGE_PICK_CODE = 2;
@@ -111,7 +119,12 @@ public class AddingDataByUserFragment extends Fragment {
               rclView.notifyDataSetChanged();
             }
         });
-
+        dbm = new DatabaseManager(getActivity());
+        edtAbout = view.findViewById(R.id.edtAbout);
+        //edtAddress = view.findViewById(R.id.)
+        edtPlaceName =  view.findViewById(R.id.edtPlaceName);
+        btnregister =  view.findViewById(R.id.btnregister);
+        //imgAdderListener = view.findViewById(R.id.)
         return view;
     }
 
@@ -136,6 +149,18 @@ public class AddingDataByUserFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onClick(View view) {
+        final String PlaceName = edtPlaceName.getText().toString();
+        final String About = edtAbout.getText().toString();
+        //final String Address = edtAddress.getText().toString();
+        final String Placename = edtPlaceName.getText().toString();
+        Data place = new Data (PlaceName,About);
+        place.Placename = PlaceName;
+        place.About = About;
+        //place.Address = Address;
+
+    }
 
     private static class MyRecyclerView extends androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder> {
 

@@ -59,7 +59,7 @@ public class ListAdapter extends RecyclerView.Adapter implements Filterable {
                     String searchChar = charSequence.toString().toLowerCase();
                     List<Data> resultData = new ArrayList<Data>();
                     for (Data dta: listFilter) {
-                            if(dta.getTitle().toLowerCase().contains(searchChar)){
+                            if(dta.getPlacename().toLowerCase().contains(searchChar)){
                                 resultData.add(dta);
                             }
                     }
@@ -98,7 +98,7 @@ public class ListAdapter extends RecyclerView.Adapter implements Filterable {
         }
        public void bindView(int position){
             Data dta =listData.get(position);
-            String s = dta.getTitle();
+            String s = dta.getPlacename();
             textViewTitle.setText(s);
             textViewDescription.setText("Description");
             imageViewContent.setImageResource(R.drawable.begard);

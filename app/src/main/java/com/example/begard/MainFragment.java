@@ -12,8 +12,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.common.data.AbstractDataBuffer;
+
 import java.security.PublicKey;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -72,7 +75,7 @@ public class MainFragment extends Fragment implements ListAdapter.onAdapterListe
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         recyclerView = view.findViewById(R.id.recycle);
         for (String data : new Data().getStrData()) {
-            Data d = new Data(data);
+            Data d = new Data();
             dtaUser.add(d);
         }
          listAdapter = new ListAdapter(MainFragment.this,dtaUser);

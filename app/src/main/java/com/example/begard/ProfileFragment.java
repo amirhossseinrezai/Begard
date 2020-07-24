@@ -2,12 +2,10 @@ package com.example.begard;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.text.TextUtils;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -71,7 +69,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         edtID = view.findViewById(R.id.edtID);
         edtName =  view.findViewById(R.id.edtName);
         edtEmail = view.findViewById(R.id.edtEmail);
-        edtNumber =  view.findViewById(R.id.edtNumber);
+        edtNumber =  view.findViewById(R.id.edtEmail);
         btnInsert =  view.findViewById(R.id.btnInsert);
         btnView = view.findViewById(R.id.btnView);
         btnUpdate =  view.findViewById(R.id.btnUpdate);
@@ -82,30 +80,74 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        String mID = edtID.getText().toString();
-        String mName = edtName.getText().toString();
-        String email = edtEmail.getText().toString();
-        String number = edtNumber.getText().toString();
-        if (TextUtils.isEmpty(mID) || TextUtils.isEmpty(mName) || TextUtils.isEmpty(email) || TextUtils.isEmpty(number)){
+        final String UserID = edtID.getText().toString();
+        final String fullname = edtName.getText().toString();
+        final String email = edtEmail.getText().toString();
+        final String number = edtNumber.getText().toString();
+        final String password = edtNumber.getText().toString();
 
+        if (TextUtils.isEmpty(UserID) || TextUtils.isEmpty(fullname) || TextUtils.isEmpty(email) || TextUtils.isEmpty(number)
+                || TextUtils.isEmpty(password)){
             Toast.makeText(getActivity(), "تمامی فیلدها باید تکمیل شود", Toast.LENGTH_LONG).show();
 
         } else {
 
-            User user = new User(email,number,mName);
-            user.UserID = mID;
-            user.fullName = mName;
+            User user = new User(UserID,fullname,email,number,password);
+            user.UserID = UserID;
+            user.fullName = fullname;
             user.email = email;
             user.number = number;
+            user.password = password;
             dbm.insertUser(user);
             Toast.makeText(getActivity(), "اطلاعات با موفقیت ذخیره شد", Toast.LENGTH_LONG).show();
     }
-       // Data data = new Data();
-        //dbm.insertData(data);
-        //data.Price = Price;
-int x ;
+        btnView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String vUserID = edtID.getText().toString();
+                User vuser = dbm.getUser(vUserID);
+                edtName.setText(vuser.fullName);
+                edtEmail.setText(vuser.email);
+                edtNumber.setText(vuser.number);
+            }
+        });
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String uID = edtID.getText().toString();
+                String uName = edtName.getText().toString();
+                String unumber = edtNumber.getText().toString();
+                String uemail = edtEmail.getText().toString();
+                String upassword = edtNumber.getText().toString();
+
+                User uUser = new User(UserID,fullname,email,number,password);
+                uUser.UserID = uID;
+                uUser.fullName = uName;
+                uUser.email = uemail;
+                uUser.number = unumber;
+                uUser.password = upassword;
+                dbm.updateUser(uUser);
+
+            }
+        });
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String delID = edtID.getText().toString();
+                User duser = new User(UserID,fullname,email,number,password);
+                duser.UserID = delID;
+                boolean del = dbm.deletePerson(duser);
+
+                if (del)
+                    Toast.makeText(getActivity(), "اطلاعات حذف شد", Toast.LENGTH_LONG).show();
+                else
+                    Toast.makeText(getActivity(), "در حذف اطلاعات اشکالی وجود دارد", Toast.LENGTH_LONG).show();
 
 
+            }
+        });
     }
 
 }

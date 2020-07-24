@@ -20,7 +20,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class Log_In extends AppCompatActivity {
 
-    private EditText edtEmail,edtPassword;
+    private EditText edtUserID,edtPassword;
     private Button btnSignin,btnSignUp;
     private TextView txtHaveNotRegistered;
     private FirebaseAuth myfirebaseAuth;
@@ -30,12 +30,11 @@ public class Log_In extends AppCompatActivity {
         setContentView(R.layout.activity_log__in);
 
         myfirebaseAuth = FirebaseAuth.getInstance();
-        edtEmail =findViewById(R.id.edtNumber);
+        edtUserID =findViewById(R.id.edtEmail);
         edtPassword =findViewById(R.id.edtPassword);
         txtHaveNotRegistered =findViewById(R.id.chTextForgottenPassword);
         btnSignin = findViewById(R.id.btnSignIn);
         btnSignUp =findViewById(R.id.btnSignUp);
-
 
 
         if (myfirebaseAuth.getCurrentUser() != null) {
@@ -51,18 +50,18 @@ public class Log_In extends AppCompatActivity {
         btnSignin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String email = edtEmail.getText().toString();
+                String UserID = edtUserID.getText().toString();
                 String password = edtPassword.getText().toString();
-                if(email.isEmpty()){
-                    edtEmail.setError("Please enter your Email");
-                    edtEmail.requestFocus();
+                if(UserID.isEmpty()){
+                    edtUserID.setError("Please enter your UserID");
+                    edtUserID.requestFocus();
                 }else if(password.isEmpty()){
                     edtPassword.setError("Please enter you'r password");
                     edtPassword.requestFocus();
-                }else if( email.isEmpty() && password.isEmpty()){
+                }else if( UserID.isEmpty() && password.isEmpty()){
                     Toast.makeText(Log_In.this,"Fields are empty!",Toast.LENGTH_SHORT).show();
-                }else if(!(email.isEmpty() && password.isEmpty())) {
-                    myfirebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(Log_In.this, new OnCompleteListener<AuthResult>() {
+                }else if(!(UserID.isEmpty() && password.isEmpty())) {
+                    myfirebaseAuth.signInWithEmailAndPassword(UserID, password).addOnCompleteListener(Log_In.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (!(task.isSuccessful())) {

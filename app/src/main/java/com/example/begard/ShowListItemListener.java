@@ -37,9 +37,9 @@ public class ShowListItemListener extends AppCompatActivity implements DatePicke
         Intent intent =getIntent();
         if(intent.getExtras() != null){
             Data data = (Data) intent.getSerializableExtra("data");
-            txtTitle.setText(data.getTitle());
+            txtTitle.setText(data.getPlacename());
             txtCosts.setText("250000"+"تومان ");
-            txtDescription.setText(data.getDescription());
+            txtDescription.setText(data.getAbout());
             ImageAdapter imageAdapter = new ImageAdapter(this,data.getmImage());
             viewPager.setAdapter(imageAdapter);
         }
